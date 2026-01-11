@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/ocr")
 @CrossOrigin
 public class OcrController {
-
+//  just a comment
     @Autowired
     private OcrService ocrService;
 
