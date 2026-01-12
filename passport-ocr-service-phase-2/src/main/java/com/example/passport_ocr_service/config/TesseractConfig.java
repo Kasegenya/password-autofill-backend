@@ -12,22 +12,17 @@ public class TesseractConfig {
     @Bean
     public Tesseract tesseract() {
         Tesseract t = new Tesseract();
-
-// Option 1: Try the default path (Tesseract 5+ usually installs here)
         File tessData = new File("/usr/share/tesseract-ocr/5/tessdata");
-        if (tessData.exists()) {
-            t.setDatapath(tessData.getAbsolutePath());
-        } else {
-            // fallback: assume system default
-            t.setDatapath(null);
+        System.out.println("Tessdata exists? " + tessData.exists());
+        if (!tessData.exists()) {
+            System.out.println("Listing /usr/share/tesseract-ocr:");
+            File[] files = new File("/usr/share/tesseract-ocr").listFiles();
+            for (File f : files) System.out.println(" - " + f.getName());
         }
-
+        t.setDatapath(tessData.exists() ? tessData.getAbsolutePath() : null);
         t.setLanguage("eng");
         t.setPageSegMode(6);
 
-//        t.setDatapath("/usr/share/tesseract-ocr/5/tessdata");
-//        t.setLanguage("eng");
-//        t.setPageSegMode(6); // MRZ friendly
         return t;
     }
 }
