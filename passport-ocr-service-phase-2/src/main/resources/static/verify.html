@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thibitisha Taarifa – NMB</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <img src="images/nmb_logo.png" alt="NMB Bank" class="logo">
+
+  <h1>Saidia kuhudumiwa haraka</h1>
+  <p class="subtitle">Thibitisha taarifa zako ili kuendelea</p>
+
+  <div class="card">
+    <div class="card-header"><h2>Taarifa Zilizopatikana</h2></div>
+
+    <div class="field"><label>First Name</label><input type="text" id="firstName"></div>
+    <div class="field"><label>Last Name</label><input type="text" id="lastName"></div>
+    <div class="field"><label>Passport Number</label><input type="text" id="passportNumber"></div>
+    <div class="field"><label>Nationality</label><input type="text" id="nationality"></div>
+    <div class="field"><label>Date of Birth</label><input type="date" id="dateOfBirth"></div>
+    <div class="field"><label>Gender</label>
+      <select id="gender">
+        <option value="">Chagua</option>
+        <option value="Male">Mwanaume</option>
+        <option value="Female">Mwanamke</option>
+      </select>
+    </div>
+    <div class="field"><label>Expiry Date</label><input type="date" id="expiryDate"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-retake" onclick="location.href='camera.html'">Piga picha tena</button>
+    <button class="btn btn-continue" id="continueBtn">Endelea</button>
+  </div>
+
+  <p class="security">🔒 Taarifa zako zinalindwa kwa usalama wa hali ya juu</p>
+</div>
+
+<script>
+  // Prefill fields from OCR
+  const ocrData = JSON.parse(sessionStorage.getItem("ocrData") || "{}");
+  if (ocrData) {
+    document.getElementById('firstName').value = ocrData.firstName || "";
+    document.getElementById('lastName').value = ocrData.lastName || "";
+    document.getElementById('passportNumber').value = ocrData.passportNumber || "";
+    document.getElementById('nationality').value = ocrData.nationality || "";
+    document.getElementById('dateOfBirth').value = ocrData.dateOfBirth || "";
+    document.getElementById('gender').value = ocrData.gender || "";
+    document.getElementById('expiryDate').value = ocrData.expiryDate || "";
+  }
+
+  // Endelea button
+  document.getElementById('continueBtn').addEventListener('click', () => {
+    // Optionally, collect edited data
+    const passportData = {
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      passportNumber: document.getElementById('passportNumber').value,
+      nationality: document.getElementById('nationality').value,
+      dateOfBirth: document.getElementById('dateOfBirth').value,
+      gender: document.getElementById('gender').value,
+      expiryDate: document.getElementById('expiryDate').value
+    };
+    console.log("User confirmed data:", passportData);
+
+    // Redirect to third-party
+    window.location.href = "https://inbound.nicinsurance.co.tz/";
+  });
+</script>
+
+</body>
+</html>

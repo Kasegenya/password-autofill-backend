@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retake Passport Photo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="camera-container">
+  <video id="camera" autoplay playsinline muted style="width:100%; height:400px; object-fit:cover; border-radius:12px;"></video>
+  <div class="scan-box"></div>
+
+  <div class="camera-actions">
+    <button class="btn btn-blue" id="retakeBtn">Retake</button>
+    <button class="btn btn-orange" id="continueCameraBtn">Continue</button>
+  </div>
+</div>
+
+<script>
+const video = document.getElementById('camera');
+
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "environment" } }
+    });
+    video.srcObject = stream;
+  } catch(err) {
+    alert("Camera access denied or unavailable");
+    console.error(err);
+  }
+}
+startCamera();
+
+// Retake button reloads camera
+document.getElementById('retakeBtn').addEventListener('click', startCamera);
+
+// Continue button simulates OCR and redirects to verify
+document.getElementById('continueCameraBtn').addEventListener('click', () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const imageData = canvas.toDataURL("image/png");
+
+  // Simulate OCR data (replace this with backend API call)
+  const ocrData = {
+    firstName: "John",
+    lastName: "Doe",
+    passportNumber: "A1234567",
+    nationality: "Tanzania",
+    dateOfBirth: "1990-01-01",
+    gender: "Male",
+    expiryDate: "2030-01-01"
+  };
+
+  // Store OCR data
+  sessionStorage.setItem("ocrData", JSON.stringify(ocrData));
+  sessionStorage.setItem("passportImage", imageData);
+
+  // Redirect to verify page
+  window.location.href = "verify.html";
+});
+</script>
+
+</body>
+</html>

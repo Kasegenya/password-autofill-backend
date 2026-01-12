@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NMB - Passport Capture</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <img src="images/nmb_logo.png" alt="NMB Bank" class="logo">
+
+  <h1>Get Assisted by NMB</h1>
+  <p class="subtitle">Passport capture service</p>
+
+  <div class="card">
+    <div class="card-header"><h2>Capture your Passport</h2></div>
+    <div class="field">
+      <div class="camera-area" style="position: relative; height: 300px; overflow: hidden; border-radius: 12px;">
+        <video id="camera-preview" autoplay playsinline muted style="width:100%; height:100%; object-fit:cover;"></video>
+        <div class="scan-frame"></div>
+      </div>
+      <button class="btn btn-blue" id="captureBtn">Take Photo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label>Phone Number *</label>
+      <input type="tel" id="phone" placeholder="07XXXXXXXX">
+    </div>
+    <div class="field">
+      <label>Email *</label>
+      <input type="email" id="email" placeholder="example@email.com">
+    </div>
+  </div>
+
+  <button class="btn btn-orange" id="nextBtn" disabled>Continue</button>
+  <p class="security">🔒 Your information is secure</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
