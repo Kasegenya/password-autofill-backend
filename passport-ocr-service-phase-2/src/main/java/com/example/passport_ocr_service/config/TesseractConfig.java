@@ -12,7 +12,7 @@ public class TesseractConfig {
     @Bean
     public Tesseract tesseract() {
         Tesseract t = new Tesseract();
-        File tessData = new File("/usr/share/tesseract-ocr/5/tessdata");
+        File tessData = new File("/usr/share/tesseract-ocr/4.00/tessdata");
         System.out.println("Tessdata exists? " + tessData.exists());
         if (!tessData.exists()) {
             System.out.println("Listing /usr/share/tesseract-ocr:");
