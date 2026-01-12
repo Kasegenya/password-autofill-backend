@@ -10,7 +10,7 @@ public class TesseractConfig {
     @Bean
     public Tesseract tesseract() {
         Tesseract t = new Tesseract();
-        t.setDatapath("C:/Program Files/Tesseract-OCR/tessdata");
+        t.setDatapath("/usr/share/tesseract-ocr/4.00/tessdata");
         t.setLanguage("eng");
         t.setPageSegMode(6); // MRZ friendly
         return t;
